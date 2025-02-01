@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <!doctype html>
@@ -10,8 +11,26 @@ import "../styles/global.css";
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+		<ClientRouter />
 	</head>
-	<body class="bg-gray-950 text-white">
+	<body class="bg-[#1a1e21] text-white min-h-screen">
+		<nav class="fixed w-full top-0 p-6 z-50">
+		  <div class="max-w-4xl mx-auto">
+			<div class="bg-gray-800/30 backdrop-blur-lg rounded-full p-2">
+			  <div class="flex items-center justify-center gap-8">
+				<a href="/" class="px-4 py-2 bg-white text-black rounded-full">Home</a>
+				<a href="/about" class="hover:text-gray-300 transition-colors">About</a>
+				<a href="/projects" class="hover:text-gray-300 transition-colors">Projects</a>
+				<a href="/contact" class="bg-gray-800 px-4 py-2 rounded-full flex items-center gap-2 hover:bg-gray-700 transition-colors">
+				  Let's Talk
+				  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+					<path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+				  </svg>
+				</a>
+			  </div>
+			</div>
+		  </div>
+		</nav>
 		<slot />
 	</body>
 </html>
