@@ -18,7 +18,7 @@ const works = [
 ---
 
 <Layout>
-	<main class="min-h-screen flex flex-col items-center justify-center px-4">
+	<main class="min-h-screen flex flex-col items-center justify-center px-4 fade-section" id="hero-main">
 		<h1 class="text-7xl font-bold mb-4">CHRISTIAN PUGA</h1>
 		<p class="text-xl text-gray-300">Hi!, I make digital stuff look and feel awesome.</p>
 		
@@ -28,9 +28,9 @@ const works = [
 			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
 		  </svg>
 		</div>
-	  </main>
+	</main>
 
-	  <section class="max-w-[880px] mx-auto text-white py-10 px-6">
+	<section class="max-w-[880px] mx-auto text-white py-10 px-6 fade-section" id="work-section">
 		<h2 class="text-2xl font-semibold mb-6 text-left">Selected work</h2>
 	  
 		<div class="space-y-8">
@@ -47,5 +47,66 @@ const works = [
 			</div>
 		  ))}
 		</div>
-	  </section>
+	</section>
 </Layout>
+
+<style>
+	.fade-section {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: all 1s ease-out;
+	}
+
+	.fade-in {
+		opacity: 1;
+		transform: translateY(20px);
+	}
+
+	/* Special case for hero section to start visible */
+	#hero-main {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	#hero-main.fade-out {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+</style>
+
+<script>
+	const observerOptions = {
+		root: null,
+		threshold: 0.2,
+		rootMargin: "0px"
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.target.id === 'hero-main') {
+				// Hero section fades out when scrolling down
+				if (!entry.isIntersecting) {
+					entry.target.classList.add('fade-out');
+				} else {
+					entry.target.classList.remove('fade-out');
+				}
+			} else {
+				// Work section fades in when scrolling down
+				if (entry.isIntersecting) {
+					entry.target.classList.add('fade-in');
+				} else {
+					entry.target.classList.remove('fade-in');
+				}
+			}
+		});
+	}, observerOptions);
+
+	// Start observing both sections
+	document.addEventListener('DOMContentLoaded', () => {
+		const mainSection = document.getElementById('hero-main');
+		const workSection = document.getElementById('work-section');
+		
+		if (mainSection) observer.observe(mainSection);
+		if (workSection) observer.observe(workSection);
+	});
+</script>
