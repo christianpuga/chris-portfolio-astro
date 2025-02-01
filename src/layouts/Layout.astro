@@ -20,10 +20,11 @@ const isCurrentPage = (path: string) => {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Your Name - Digital Creator</title>
+    <title>Christian Puga - UI/UX Designer</title>
+	<ClientRouter />
   </head>
   <body class="bg-[#1a1e21] text-white min-h-screen">
-    <nav class="fixed w-full top-0 p-6 z-50">
+    <nav class="fixed w-full top-0 p-6 z-50 transition-all duration-1200" id="navbar">
 		<div class="max-w-[410px] mx-auto">
 			<div class="bg-black/10 backdrop-blur-sm rounded-full p-1.5 flex items-center justify-between">
           {navItems.map(({ path, label }) => (
@@ -62,6 +63,35 @@ const isCurrentPage = (path: string) => {
     </nav>
 
 <slot />
+
+<script>
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const navbar = document.getElementById('navbar');
+        const currentScrollY = window.scrollY;
+
+        if (navbar) {
+          if (currentScrollY > lastScrollY && currentScrollY > 10) {
+            navbar.style.transform = 'translateY(-100%)';
+            navbar.style.opacity = '0';
+          } else {
+            navbar.style.transform = 'translateY(0)';
+            navbar.style.opacity = '1';
+          }
+        }
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+      });
+
+      ticking = true;
+    }
+  });
+</script>
   </body>
 </html>
 
