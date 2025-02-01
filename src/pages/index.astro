@@ -1,10 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
+// selected-work.astro
+const works = [
+  {
+    company: "Felkrem",
+    project: "Branding",
+    type: "Redeisgn",
+    image: "https://via.placeholder.com/600x400" // Placeholder image
+  },
+  {
+    company: "Neerme",
+    project: "Project Name 2",
+    type: "Project Type 2",
+    image: "https://via.placeholder.com/600x400"
+  }
+];
 ---
 
 <Layout>
 	<main class="min-h-screen flex flex-col items-center justify-center px-4">
-		<h1 class="text-7xl font-bold mb-4">YOUR NAME</h1>
+		<h1 class="text-7xl font-bold mb-4">CHRISTIAN PUGA</h1>
 		<p class="text-xl text-gray-300">Hi!, I make digital stuff look and feel awesome.</p>
 		
 		<div class="absolute bottom-8 flex flex-col items-center">
@@ -14,4 +29,23 @@ import Layout from '../layouts/Layout.astro';
 		  </svg>
 		</div>
 	  </main>
+
+	  <section class="max-w-[880px] mx-auto text-white py-10 px-6">
+		<h2 class="text-2xl font-semibold mb-6 text-left">Selected work</h2>
+	  
+		<div class="space-y-8">
+		  {works.map((work) => (
+			<div class="rounded-xl overflow-hidden">
+			  <div class="w-full h-[540px] bg-white"></div>
+			  <div class="flex justify-between items-center py-4">
+				<div>
+				  <h3 class="text-lg font-medium">{work.company}</h3>
+				  <p class="text-sm text-gray-400">{work.project}</p>
+				</div>
+				<span class="text-sm text-gray-400">{work.type}</span>
+			  </div>
+			</div>
+		  ))}
+		</div>
+	  </section>
 </Layout>
