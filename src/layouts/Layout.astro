@@ -27,7 +27,7 @@ const isCurrentPage = (path: string) => {
   <body class="bg-[#1a1e21] text-white min-h-screen">
     <nav class="fixed w-full top-0 p-6 z-50 transition-all duration-1200" id="navbar">
 		<div class="max-w-[410px] mx-auto">
-			<div class="bg-black/10 backdrop-blur-sm rounded-full p-1.5 flex items-center justify-between">
+			<div class="bg-white/10 backdrop-blur-sm rounded-full p-1.5 flex items-center justify-between">
           {navItems.map(({ path, label }) => (
             <a
               href={path}
@@ -46,18 +46,20 @@ const isCurrentPage = (path: string) => {
             class="inline-flex items-center bg-[#1C1C1C] text-white px-5 py-1.5 rounded-full text-sm font-medium hover:bg-[#2C2C2C] transition-colors whitespace-nowrap group"
           >
             Let's Talk
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              class="h-4 w-4 ml-2 transform transition-transform group-hover:translate-x-0.5" 
-              viewBox="0 0 20 20" 
-              fill="currentColor"
-            >
-              <path 
-                fill-rule="evenodd" 
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                clip-rule="evenodd" 
-              />
-            </svg>
+            <span class="ml-2 bg-[#D8FB45] rounded-full p-1 flex items-center justify-center transform transition-transform group-hover:translate-x-0.5">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                class="h-3 w-3 text-[#1a1e21]" 
+                viewBox="0 0 20 20" 
+                fill="currentColor"
+              >
+                <path 
+                  fill-rule="evenodd" 
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+                  clip-rule="evenodd" 
+                />
+              </svg>
+            </span>
           </a>
         </div>
       </div>
