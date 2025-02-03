@@ -19,99 +19,117 @@ const works = [
 
 <Layout>
 	<main class="min-h-screen flex flex-col items-center justify-center px-4 fade-section" id="hero-main">
-		<h1 class="text-7xl font-bold mb-4">CHRISTIAN PUGA</h1>
-		<p class="text-xl text-gray-300">Hi!, I make digital stuff look and feel awesome.</p>
+		<h1 class="text-7xl md:text-8xl sm:text-6xl xs:text-5xl font-bold mb-4 text-center sm:text-center text-left">CHRISTIAN PUGA</h1>
+		<p class="text-xl sm:text-lg text-gray-300 text-center sm:text-center text-left w-full">Hi!, I make digital stuff look and feel awesome.</p>
 		
 		<div class="absolute bottom-8 flex flex-col items-center">
-		  <span class="text-gray-400">Scroll to explore</span>
-		  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mt-2 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-		  </svg>
+			<span class="text-gray-400">Scroll to explore</span>
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mt-2 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+			</svg>
 		</div>
 	</main>
 
-	<section class="max-w-[880px] mx-auto text-white py-10 px-6 fade-section" id="work-section">
+	<section class="max-w-[880px] mx-auto text-white py-10 px-6" id="work-section">
 		<h2 class="text-2xl font-semibold mb-6 text-left">Selected work</h2>
-	  
 		<div class="space-y-8">
-		  {works.map((work) => (
-			<div class="rounded-xl overflow-hidden">
-			  <div class="w-full h-[540px] bg-white"></div>
-			  <div class="flex justify-between items-center py-4">
-				<div>
-				  <h3 class="text-lg font-medium">{work.company}</h3>
-				  <p class="text-sm text-gray-400">{work.project}</p>
+			{works.map((work) => (
+				<div class="rounded-xl overflow-hidden">
+					<div class="w-full h-[300px] md:h-[540px] bg-white"></div>
+					<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 gap-2 sm:gap-0">
+						<div>
+							<h3 class="text-lg font-medium">{work.company}</h3>
+							<p class="text-sm text-gray-400">{work.project}</p>
+						</div>
+						<span class="text-sm text-gray-400">{work.type}</span>
+					</div>
 				</div>
-				<span class="text-sm text-gray-400">{work.type}</span>
-			  </div>
-			</div>
-		  ))}
+			))}
 		</div>
 	</section>
 
-	<div class="min-h-screen text-white flex flex-col py-16 max-w-[880px] mx-auto px-6 fade-section" id="about-section">
+	<div class="min-h-screen text-white flex flex-col py-16 max-w-[880px] mx-auto px-6" id="about-section">
 		<h1 class="text-xl font-semibold mb-8 w-full text-left">About me</h1>
-	  
+		
 		<div class="flex flex-col gap-8 w-full">
-		  <div class="flex items-center gap-8">
-			<div class="w-76 h-124 bg-gray-300 rounded-xl shrink-0"></div>
+			{[1, 2, 3].map(() => (
+				<div class="flex flex-col sm:flex-row items-start sm:items-center gap-8">
+					<div class="w-full sm:w-76 h-48 sm:h-124 bg-gray-300 rounded-xl shrink-0"></div>
+					<div>
+						<h2 class="text-lg font-semibold mb-2">About me</h2>
+						<p class="text-sm text-gray-400">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</p>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+
+	
+	<div class="text-white flex items-center justify-center px-6">
+	  <div class="max-w-[880px] w-full">
+		<h2 class="text-xl font-semibold mb-8 border-b border-gray-700 pb-4">Experience</h2>
+	
+		<div class="space-y-12">
+		  <!-- Azzule Experience -->
+		  <div class="flex justify-between">
 			<div>
-			  <h2 class="text-lg font-semibold mb-2">About me</h2>
-			  <p class="text-sm text-gray-400">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
+			  <h3 class="text-2xl font-bold">Azzule</h3>
+			</div>
+			<div class="max-w-md">
+			  <h4 class="text-lg font-semibold">Lead Designer</h4>
+			  <p class="text-gray-400 text-sm">Jun /2020 - Present</p>
+			  <p class="text-gray-300 mt-2 text-sm">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 			  </p>
 			</div>
 		  </div>
-			
-		  <div class="flex items-center gap-8">
-			<div class="w-76 h-124 bg-gray-500 rounded-xl shrink-0"></div>
-			<p class="text-sm text-gray-400">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-			</p>
+	
+		  <!-- Televisa Experience -->
+		  <div class="flex justify-between">
+			<div>
+			  <h3 class="text-2xl font-bold">Televisa</h3>
+			</div>
+			<div class="max-w-md">
+			  <h4 class="text-lg font-semibold">User Interface Designer</h4>
+			  <p class="text-gray-400 text-sm">Oct/2018 - Jun/2020</p>
+			  <p class="text-gray-300 mt-2 text-sm">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			  </p>
+			</div>
 		  </div>
-			
-		  <div class="flex items-center gap-8">
-			<div class="w-76 h-124 bg-gray-700 rounded-xl shrink-0"></div>
-			<p class="text-sm text-gray-600">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-			</p>
+	
+		  <!-- Noroeste Experience -->
+		  <div class="flex justify-between">
+			<div>
+			  <h3 class="text-2xl font-bold">Noroeste</h3>
+			</div>
+			<div class="max-w-md">
+			  <h4 class="text-lg font-semibold">User Experience Designer</h4>
+			  <p class="text-gray-400 text-sm">Feb/2018 - Dec/2018</p>
+			  <p class="text-gray-300 mt-2 text-sm">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			  </p>
+			</div>
 		  </div>
 		</div>
+	  </div>
 	</div>
+	
+
 </Layout>
 
 <style>
 	.fade-section {
-		opacity: 0;
-		transform: translateY(20px);
+		opacity: 1;
+		transform: translateY(0);
 		transition: all 1s ease-out;
-	}
-
-	.fade-in {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	/* Special case for hero section to start visible */
-	#hero-main {
-		opacity: 1;
-		transform: translateY(0);
 	}
 
 	#hero-main.fade-out {
 		opacity: 0;
 		transform: translateY(-20px);
-	}
-
-	.scroll-reveal {
-		opacity: 0;
-		transform: translateY(2rem);
-		transition: all 700ms ease-out;
-	}
-
-	.scroll-reveal.show {
-		opacity: 1;
-		transform: translateY(0);
 	}
 </style>
 
@@ -119,35 +137,25 @@ const works = [
 	let cleanup: (() => void) | null = null;
 
 	function initializeObservers() {
-		// Fade section observer
 		const fadeSectionObserver = new IntersectionObserver((entries) => {
 			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('fade-in');
-					entry.target.classList.remove('fade-out');
-				} else {
-					entry.target.classList.remove('fade-in');
+				if (!entry.isIntersecting) {
 					entry.target.classList.add('fade-out');
+				} else {
+					entry.target.classList.remove('fade-out');
 				}
 			});
 		}, {
-			threshold: 0.3, // Increased threshold to trigger fade earlier
+			threshold: 0.3,
 			rootMargin: '-10% 0px'
 		});
 
-		// Initialize observers
-		document.querySelectorAll('.fade-section, #about-section').forEach((element) => {
-			if (element.id !== 'hero-main') {
-				fadeSectionObserver.observe(element);
-			}
-		});
-
+		// Only observe hero section
 		const heroSection = document.getElementById('hero-main');
 		if (heroSection) {
 			fadeSectionObserver.observe(heroSection);
 		}
 
-		// Cleanup function
 		return () => {
 			fadeSectionObserver.disconnect();
 		};

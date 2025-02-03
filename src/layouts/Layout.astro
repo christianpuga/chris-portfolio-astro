@@ -5,7 +5,6 @@ import { ClientRouter } from 'astro:transitions';
 const currentPath = Astro.url.pathname;
 const navItems = [
   { path: '/', label: 'Home' },
-  { path: '/about', label: 'About' },
   { path: '/projects', label: 'Projects' },
 ];
 const isCurrentPage = (path: string) => {
@@ -25,75 +24,137 @@ const isCurrentPage = (path: string) => {
 	<ClientRouter />
   </head>
   <body class="bg-[#1a1e21] text-white min-h-screen">
+    <!-- Update gradient color to match background -->
+    <div id="top-gradient" class="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-[#1a1e21]/95 to-transparent pointer-events-none opacity-0 transition-opacity duration-300 z-40"></div>
+    
     <nav class="fixed w-full top-0 p-6 z-50 transition-all duration-1200" id="navbar">
 		<div class="max-w-[410px] mx-auto">
-			<div class="bg-white/10 backdrop-blur-sm rounded-full p-1.5 flex items-center justify-between">
-          {navItems.map(({ path, label }) => (
-            <a
-              href={path}
-              class:list={[
-                'px-5 py-1.5 rounded-full text-sm font-medium transition-all duration-200',
-                isCurrentPage(path) 
-                  ? 'bg-[#E8E8E8] text-black'
-                  : 'text-[#E8E8E8] hover:bg-white/10'
-              ]}
-            >
-              {label}
-            </a>
-          ))}
-          <a 
-            href="/contact" 
-            class="inline-flex items-center bg-[#1C1C1C] text-white px-5 py-1.5 rounded-full text-sm font-medium hover:bg-[#2C2C2C] transition-colors whitespace-nowrap group"
-          >
-            Let's Talk
-            <span class="ml-2 bg-[#D8FB45] rounded-full p-1 flex items-center justify-center transform transition-transform group-hover:translate-x-0.5">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                class="h-3 w-3 text-[#1a1e21]" 
-                viewBox="0 0 20 20" 
-                fill="currentColor"
-              >
-                <path 
-                  fill-rule="evenodd" 
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                  clip-rule="evenodd" 
-                />
-              </svg>
-            </span>
-          </a>
-        </div>
-      </div>
-    </nav>
+			<!-- Mobile Menu -->
+			<div class="flex items-center justify-start gap-3 sm:hidden">
+				<button id="menu-toggle" class="text-white">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				</button>
+				<span class="text-white text-sm font-medium">Menu</span>
+			</div>
+
+			<!-- Desktop Menu -->
+			<div class="hidden sm:flex bg-white/10 backdrop-blur-sm rounded-full py-3 px-4 items-center justify-between gap-0">
+				{navItems.map(({ path, label }) => (
+					<a
+						href={path}
+						class:list={[
+							'px-8 py-4 rounded-full text-sm font-medium transition-all duration-200',
+							isCurrentPage(path) 
+								? 'bg-[#E8E8E8]/.5 backdrop-blur-sm text-white'
+								: 'text-[#E8E8E8] hover:bg-white/10'
+						]}
+					>
+						{label}
+					</a>
+				))}
+				<a 
+					href="/contact" 
+					class="inline-flex items-center bg-[#1C1C1C] text-white px-5 py-3.5 rounded-full text-sm font-medium hover:bg-[#2C2C2C] transition-colors whitespace-nowrap group"
+				>
+					Let's Talk
+					<span class="ml-2 bg-[#D8FB45] rounded-full p-1 flex items-center justify-center transform transition-transform group-hover:translate-x-0.5">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-[#1a1e21]" viewBox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+						</svg>
+					</span>
+				</a>
+			</div>
+
+			<!-- Mobile Menu Panel -->
+			<div id="mobile-menu" class="fixed inset-0 bg-[#1a1e21] z-50 transform translate-x-full transition-transform duration-300 sm:hidden">
+				<div class="p-6">
+					<div class="flex justify-between items-center mb-8">
+						<span class="text-white text-sm font-medium">Menu</span>
+						<button id="menu-close" class="text-white">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+							</svg>
+						</button>
+					</div>
+					<div class="flex flex-col gap-4">
+						{navItems.map(({ path, label }) => (
+							<a
+								href={path}
+								class:list={[
+									'px-5 py-3 rounded-full text-sm font-medium transition-all duration-200',
+									isCurrentPage(path) 
+										? 'bg-[#E8E8E8]/20 text-black'
+										: 'text-[#E8E8E8] hover:bg-white/10'
+								]}
+							>
+								{label}
+							</a>
+						))}
+						<a 
+							href="/contact" 
+							class="inline-flex items-center justify-center bg-[#1C1C1C] text-white px-5 py-1.5 rounded-full text-sm font-medium hover:bg-[#2C2C2C] transition-colors whitespace-nowrap group"
+						>
+							Let's Talk
+							<span class="ml-2 bg-[#D8FB45] rounded-full p-1 flex items-center justify-center">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-[#1a1e21]" viewBox="0 0 20 20" fill="currentColor">
+									<path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+								</svg>
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
 
 <slot />
 
 <script>
-  let lastScrollY = window.scrollY;
-  let ticking = false;
+	let lastScrollY = window.scrollY;
+	let ticking = false;
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        const navbar = document.getElementById('navbar');
-        const currentScrollY = window.scrollY;
+	// Mobile menu functionality
+	const menuToggle = document.getElementById('menu-toggle');
+	const menuClose = document.getElementById('menu-close');
+	const mobileMenu = document.getElementById('mobile-menu');
 
-        if (navbar) {
-          if (currentScrollY > lastScrollY && currentScrollY > 10) {
-            navbar.style.transform = 'translateY(-100%)';
-            navbar.style.opacity = '0';
-          } else {
-            navbar.style.transform = 'translateY(0)';
-            navbar.style.opacity = '1';
-          }
-        }
+	menuToggle?.addEventListener('click', () => {
+		mobileMenu?.classList.remove('translate-x-full');
+	});
 
-        lastScrollY = currentScrollY;
-        ticking = false;
-      });
+	menuClose?.addEventListener('click', () => {
+		mobileMenu?.classList.add('translate-x-full');
+	});
 
-      ticking = true;
-    }
-  });
+	// Scroll functionality
+	window.addEventListener('scroll', () => {
+		if (!ticking) {
+			window.requestAnimationFrame(() => {
+				const navbar = document.getElementById('navbar');
+				const gradient = document.getElementById('top-gradient');
+				const currentScrollY = window.scrollY;
+
+				if (navbar && gradient) {
+					if (currentScrollY > lastScrollY && currentScrollY > 10) {
+						navbar.style.transform = 'translateY(-100%)';
+						navbar.style.opacity = '0';
+						gradient.style.opacity = '1';
+					} else {
+						navbar.style.transform = 'translateY(0)';
+						navbar.style.opacity = '1';
+						gradient.style.opacity = currentScrollY > 10 ? '1' : '0';
+					}
+				}
+
+				lastScrollY = currentScrollY;
+				ticking = false;
+			});
+
+			ticking = true;
+		}
+	});
 </script>
   </body>
 </html>
