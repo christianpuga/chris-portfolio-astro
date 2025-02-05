@@ -22,14 +22,12 @@ const works = [
 		<div class="flex gap-4 mb-6">
 			<button class="language-btn text-gray-400 hover:text-white transition-colors" data-lang="en">English</button>
 			<button class="language-btn text-gray-400 hover:text-white transition-colors" data-lang="es">Español</button>
-			<button class="language-btn text-gray-400 hover:text-white transition-colors" data-lang="fr">Français</button>
-			<button class="language-btn text-gray-400 hover:text-white transition-colors" data-lang="de">Deutsch</button>
 		</div>
-		<div class="content-animation-container text-center max-w-5xl">
-			<h1 class="text-5xl md:text-3xl sm:text-5xl xs:text-4xl font-bold mb-2 text-center">
+		<div class="content-animation-container text-center max-w-3xl">
+			<h1 class="text-5xl md:text-2xl sm:text-5xl xs:text-4xl font-bold mb-2 text-center">
 				Hey, I'm Christian. I design cool stuff that just makes sense.
 			</h1>
-			<p class="text-sm md:text-2xl sm:text-lg text-gray-400 text-center">
+			<p class="text-sm md:text-1xl sm:text-lg text-gray-400 text-center">
 				Simple, intuitive, and user-focused. Take a look around!
 			</p>
 		</div>
@@ -353,18 +351,10 @@ const works = [
 			es: {
 				h1: "Hola, soy Christian. Diseño cosas geniales que tienen sentido.",
 				p: "Simple, intuitivo y centrado en el usuario. ¡Echa un vistazo!"
-			},
-			fr: {
-				h1: "Salut, je suis Christian. Je conçois des choses cool qui ont du sens.",
-				p: "Simple, intuitif et centré sur l'utilisateur. Jetez un coup d'œil!"
-			},
-			de: {
-				h1: "Hi, ich bin Christian. Ich gestalte coole Dinge, die Sinn machen.",
-				p: "Einfach, intuitiv und benutzerzentriert. Schau dich um!"
 			}
 		};
 
-		const languages = ['en', 'es', 'fr', 'de'];
+		const languages = ['en', 'es'];
 
 		async function changeLanguage(langIndex: number) {
 			const lang = languages[langIndex];
@@ -383,7 +373,7 @@ const works = [
 					currentLangIndex = (currentLangIndex + 1) % languages.length;
 					changeLanguage(currentLangIndex);
 				}
-			}, 4000);
+			}, 12000);
 		}
 
 		// Start auto-changing immediately
