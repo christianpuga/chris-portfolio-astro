@@ -5,7 +5,7 @@ const works = [
   {
     company: "Felkrem",
     project: "Branding",
-    type: "Redeisgn",
+    type: "Redesign",
     image: "https://via.placeholder.com/600x400" // Placeholder image
   },
   {
@@ -15,24 +15,49 @@ const works = [
     image: "https://via.placeholder.com/600x400"
   }
 ];
+
+const content = {
+  en: {
+    title: "Hey, I'm Chris. I design cool stuff that just makes sense.",
+    subtitle: "Simple, intuitive, and user-focused. Take a look around!"
+  },
+  es: {
+    title: "Hola, soy Chris. Diseño cosas geniales que tienen sentido.",
+    subtitle: "Simple, intuitivo y centrado en el usuario. ¡Echa un vistazo!"
+  },
+
+};
+
+const currentLang = 'en'; // Default to English
 ---
 
 <Layout>
-	<main class="min-h-screen flex flex-col items-center justify-center px-4 fade-section" id="hero-main">
-		<div class="flex gap-4 mb-6">
-			<button class="language-btn text-gray-400 hover:text-white transition-colors" data-lang="en">English</button>
-			<button class="language-btn text-gray-400 hover:text-white transition-colors" data-lang="es">Español</button>
+	<main class="min-h-screen flex flex-col items-center justify-center px-4 md:pb-0 pb-20" id="hero-main">
+		<div class="flex gap-4 mb-6 relative z-[45]">
+			<button 
+				data-lang="en"
+				class="language-btn text-gray-400 hover:text-white transition-colors" 
+			>
+				English
+			</button>
+			<button 
+				data-lang="es"
+				class="language-btn text-gray-400 hover:text-white transition-colors" 
+			>
+				Español
+			</button>
 		</div>
-		<div class="content-animation-container text-center max-w-3xl">
-			<h1 class="text-5xl md:text-2xl sm:text-5xl xs:text-4xl font-bold mb-2 text-center">
-				Hey, I'm Christian. I design cool stuff that just makes sense.
+		
+		<div class="content-animation-container text-center max-w-3xl relative z-[40]">
+			<h1 id="hero-title" class="text-4xl sm:text-6xl md:text-6xl font-bold mb-2 text-center">
+				{content[currentLang].title}
 			</h1>
-			<p class="text-sm md:text-1xl sm:text-lg text-gray-400 text-center">
-				Simple, intuitive, and user-focused. Take a look around!
+			<p id="hero-subtitle" class="text-base sm:text-lg md:text-xl text-gray-400 text-center">
+				{content[currentLang].subtitle}
 			</p>
 		</div>
 		
-		<div class="absolute bottom-8 flex flex-col items-center">
+		<div class="absolute bottom-8 flex flex-col items-center pb-24 md:pb-0 z-[40]">
 			<span class="text-gray-400">Scroll to explore</span>
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mt-2 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -84,7 +109,7 @@ const works = [
 			<!-- Left Box with Bowling Text -->
 			<div class="flex flex-col">
 				<img 
-					src="https://cdn.glitch.global/922fac7e-fd84-403d-88ed-7f031183e182/chris-bowl.jpeg?v=1738651204173"
+					src="https://cdn.glitch.global/922fac7e-fd84-403d-88ed-7f031183e182/chris-desktop.jpg?v=1738798693750"
 					alt="Bowling image" 
 					class="w-94 h-124 object-cover rounded-xl"
 				/>
@@ -97,9 +122,9 @@ const works = [
 			<!-- Right Box with Description -->
 			<div class="flex flex-col">
 				<img 
-					src="https://cdn.glitch.global/922fac7e-fd84-403d-88ed-7f031183e182/chris-beach.jpg?v=1738651271028" 
+					src="https://cdn.glitch.global/922fac7e-fd84-403d-88ed-7f031183e182/chris-bowl.jpeg?v=1738651204173" 
 					alt="Hobby image" 
-					class="w-86 h-62 object-cover rounded-xl"
+					class="w-94 h-82 object-cover rounded-xl"
 				/>
 				<p class="text-gray-300 mt-4 text-sm max-w-md">
 					Lorem ipsum dolor sit amet...
@@ -217,12 +242,20 @@ const works = [
 		position: absolute;
 	}
 
-	.language-btn.active {
-		color: white;
+	.language-btn {
 		position: relative;
+		padding: 0.5rem 1rem;
+		background: transparent;
+		border: none;
+		font-size: 1rem;
+		cursor: pointer;
 	}
 
-	.language-btn.active::after {
+	.language-btn.active {
+		color: white;
+	}
+
+	.language-btn::after {
 		content: '';
 		position: absolute;
 		bottom: -2px;
@@ -230,187 +263,161 @@ const works = [
 		width: 100%;
 		height: 1px;
 		background-color: white;
+		transform: scaleX(0);
+		transition: transform 0.3s ease;
+	}
+
+	.language-btn.active::after,
+	.language-btn:hover::after {
+		transform: scaleX(1);
+	}
+
+	#hero-title,
+	#hero-subtitle {
+		opacity: 1;
+		transition: opacity 0.3s ease-in-out;
 	}
 </style>
 
-<script>
-	let cleanup: (() => void) | null = null;
-
-	function initializeObservers() {
-		const fadeSectionObserver = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (!entry.isIntersecting) {
-					entry.target.classList.add('fade-out');
-				} else {
-					entry.target.classList.remove('fade-out');
-				}
-			});
-		}, {
-			threshold: 0.3,
-			rootMargin: '-10% 0px'
-		});
-
-		// Only observe hero section
-		const heroSection = document.getElementById('hero-main');
-		if (heroSection) {
-			fadeSectionObserver.observe(heroSection);
-		}
-
-		return () => {
-			fadeSectionObserver.disconnect();
-		};
-	}
+<script is:inline>
+	// Store content object in window to access it in functions
+	window.content = {
+		en: {
+			title: "Hey, I'm Chris. I design cool stuff that just makes sense.",
+			subtitle: "Simple, intuitive, and user-focused. Take a look around!"
+		},
+		es: {
+			title: "Hola, soy Chris. Diseño cosas geniales que tienen sentido.",
+			subtitle: "Simple, intuitivo y centrado en el usuario. ¡Echa un vistazo!"
+		},
+	};
 
 	class TextScramble {
-		private el: Element;
-		private chars: string;
-		private queue: number;
-		private frameRequest: number;
-		private frame: number;
-		private resolve: Function | null;
-		private queue_length: number;
-
-		constructor(el: Element) {
+		constructor(el) {
 			this.el = el;
 			this.chars = '!<>-_\\/[]{}—=+*^?#________';
-			this.queue = 0;
-			this.frame = 0;
-			this.frameRequest = 0;
-			this.resolve = null;
-			this.queue_length = 0;
+			this.update = this.update.bind(this);
 		}
-
-		setText(newText: string) {
-			const oldText = this.el.textContent || '';
+		
+		setText(newText) {
+			const oldText = this.el.innerText;
 			const length = Math.max(oldText.length, newText.length);
-			this.queue_length = length;
-
 			const promise = new Promise((resolve) => this.resolve = resolve);
-
-			this.queue = 0;
-			const frames = [];
-
+			this.queue = [];
 			for (let i = 0; i < length; i++) {
 				const from = oldText[i] || '';
 				const to = newText[i] || '';
 				const start = Math.floor(Math.random() * 40);
 				const end = start + Math.floor(Math.random() * 40);
-				frames.push({ from, to, start, end });
+				this.queue.push({ from, to, start, end });
 			}
-
 			cancelAnimationFrame(this.frameRequest);
 			this.frame = 0;
-
-			const update = () => {
-				let output = '';
-				let complete = 0;
-
-				for (let i = 0; i < length; i++) {
-					const { from, to, start, end } = frames[i];
-					if (this.frame >= end) {
-						complete++;
-						output += to;
-					} else if (this.frame >= start) {
-						output += this.chars[Math.floor(Math.random() * this.chars.length)];
-					} else {
-						output += from;
-					}
-				}
-
-				this.el.textContent = output;
-
-				if (complete === length) {
-					if (this.resolve) this.resolve();
-				} else {
-					this.frameRequest = requestAnimationFrame(update);
-					this.frame++;
-				}
-			};
-
-			update();
+			this.update();
 			return promise;
 		}
+		
+		update() {
+			let output = '';
+			let complete = 0;
+			for (let i = 0, n = this.queue.length; i < n; i++) {
+				let { from, to, start, end, char } = this.queue[i];
+				if (this.frame >= end) {
+					complete++;
+					output += to;
+				} else if (this.frame >= start) {
+					if (!char || Math.random() < 0.28) {
+						char = this.randomChar();
+						this.queue[i].char = char;
+					}
+					output += `<span class="text-emerald-400">${char}</span>`;
+				} else {
+					output += from;
+				}
+			}
+			this.el.innerHTML = output;
+			if (complete === this.queue.length) {
+				this.resolve();
+			} else {
+				this.frameRequest = requestAnimationFrame(this.update);
+				this.frame++;
+			}
+		}
+		
+		randomChar() {
+			return this.chars[Math.floor(Math.random() * this.chars.length)];
+		}
 	}
 
-	function initializeLanguageSelector() {
-		const contentSets = document.querySelectorAll('.content-set');
-		const languageButtons = document.querySelectorAll('.language-btn');
-		let currentLangIndex = 0;
-		let isAutoChanging = true;
-		let intervalId: number;
+	function initializeScramble() {
+		const titleScrambler = new TextScramble(document.getElementById('hero-title'));
+		const subtitleScrambler = new TextScramble(document.getElementById('hero-subtitle'));
+		const languages = ['en', 'es']; // Only English and Spanish
+		let currentLang = 'en';
+		let isLanguageSelected = false;
+		let intervalId;
 
-		// Initialize scramblers for all h1 and p elements
-		const h1Scrambler = new TextScramble(document.querySelector('h1')!);
-		const pScrambler = new TextScramble(document.querySelector('p')!);
+		// Function to update button states
+		function updateButtons(lang) {
+			document.querySelectorAll('.language-btn').forEach(btn => {
+				const isActive = btn.dataset.lang === lang;
+				btn.classList.toggle('active', isActive);
+				btn.classList.toggle('text-white', isActive);
+				btn.classList.toggle('text-gray-400', !isActive);
+			});
+		}
 
-		const texts = {
-			en: {
-				h1: "Hey, I'm Christian. I design cool stuff that just makes sense.",
-				p: "Simple, intuitive, and user-focused. Take a look around!"
-			},
-			es: {
-				h1: "Hola, soy Christian. Diseño cosas geniales que tienen sentido.",
-				p: "Simple, intuitivo y centrado en el usuario. ¡Echa un vistazo!"
+		// Function to scramble text
+		function scrambleText(lang) {
+			if (!window.content[lang]) {
+				console.error('Language not found:', lang);
+				return;
 			}
-		};
-
-		const languages = ['en', 'es'];
-
-		async function changeLanguage(langIndex: number) {
-			const lang = languages[langIndex];
-			await Promise.all([
-				h1Scrambler.setText(texts[lang].h1),
-				pScrambler.setText(texts[lang].p)
-			]);
+			currentLang = lang;
+			updateButtons(lang);
+			titleScrambler.setText(window.content[lang].title);
+			subtitleScrambler.setText(window.content[lang].subtitle);
 		}
 
-		function autoChangeLanguage() {
-			// Trigger first change immediately
-			changeLanguage(currentLangIndex);
-			
-			intervalId = setInterval(() => {
-				if (isAutoChanging) {
-					currentLangIndex = (currentLangIndex + 1) % languages.length;
-					changeLanguage(currentLangIndex);
-				}
-			}, 12000);
-		}
-
-		// Start auto-changing immediately
-		autoChangeLanguage();
-
-		languageButtons.forEach((button, index) => {
-			button.addEventListener('click', () => {
-				// Stop auto-changing
-				isAutoChanging = false;
+		// Start alternating animation between English and Spanish
+		function startAlternatingAnimation() {
+			// Clear any existing interval
+			if (intervalId) {
 				clearInterval(intervalId);
-				
-				// Change to selected language with animation
-				changeLanguage(index);
-				
-				// Update active button
-				languageButtons.forEach(btn => btn.classList.remove('active'));
-				button.classList.add('active');
+			}
+
+			// Reset language selection state
+			isLanguageSelected = false;
+
+			// Set interval to switch between English and Spanish
+			intervalId = setInterval(() => {
+				if (!isLanguageSelected) {
+					// Simply toggle between en and es
+					const nextLang = currentLang === 'en' ? 'es' : 'en';
+					scrambleText(nextLang);
+				}
+			}, 5000); // Changed to 5 seconds (5000ms)
+		}
+
+		// Add click handlers to buttons
+		document.querySelectorAll('.language-btn').forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				const lang = e.currentTarget.dataset.lang;
+				if (lang) {
+					isLanguageSelected = true;
+					clearInterval(intervalId);
+					scrambleText(lang);
+				}
 			});
 		});
+
+		// Start the alternating animation
+		startAlternatingAnimation();
 	}
 
-	// Initialize immediately when possible
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initializeLanguageSelector);
-	} else {
-		initializeLanguageSelector();
-	}
 
-	// Also initialize on view transitions
-	document.addEventListener('astro:page-load', () => {
-		if (cleanup) cleanup();
-		cleanup = initializeObservers();
-		initializeLanguageSelector();
-	});
-
-	// Cleanup on page unload
-	document.addEventListener('astro:before-swap', () => {
-		if (cleanup) cleanup();
-	});
+	
+	// Initialize on both DOMContentLoaded and astro:page-load
+	document.addEventListener('DOMContentLoaded', initializeScramble);
+	document.addEventListener('astro:page-load', initializeScramble);
 </script>

@@ -21,18 +21,20 @@ const navItems: NavItem[] = [
 const currentPath = Astro.url.pathname;
 ---
 
-<div class="fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6">
+<nav class="fixed top-0 left-1/2 -translate-x-1/2 z-[50] h-16 transition-transform duration-300 w-fit" id="navbar">
   <div class="flex items-center gap-3 bg-[#1a1e21]/5 border border-gray-800 backdrop-blur-lg py-2 px-3 rounded-full shadow-lg">
     {navItems.map((item) => {
       const isActive = currentPath === item.url;
       return (
         <a
           href={item.url}
+          aria-current={isActive ? "page" : undefined}
           class:list={[
             "relative cursor-pointer text-sm font-semibold px-5 py-3 rounded-full transition-colors",
             "text-gray-400 hover:text-white",
             isActive && "bg-white/5 text-white nav-active"
           ]}
+          data-active={isActive}
         >
           <span class="hidden md:inline">{item.name}</span>
           <span class="md:hidden">
@@ -51,7 +53,102 @@ const currentPath = Astro.url.pathname;
       );
     })}
   </div>
-</div>
+</nav>
+
+<script>
+  class NavbarController {
+    constructor() {
+      this.navbar = document.getElementById('navbar');
+      this.lastScrollY = window.scrollY;
+      this.isMobile = window.innerWidth < 768; // MD breakpoint in Tailwind
+      this.init();
+      this.handleResize();
+    }
+
+    init() {
+      if (this.navbar) {
+        this.setInitialPosition();
+        this.updateNavbarVisibility();
+        this.attachEventListeners();
+      }
+    }
+
+    setInitialPosition() {
+      if (this.isMobile) {
+        this.navbar.style.top = 'auto';
+        this.navbar.style.bottom = '20px';
+        this.navbar.style.transform = 'translateY(0)';
+      } else {
+        this.navbar.style.top = '40px';
+        this.navbar.style.bottom = 'auto';
+      }
+    }
+
+    updateNavbarVisibility() {
+      if (this.isMobile) {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY < 100) {
+          this.navbar.style.transform = 'translateY(0)';
+        } else if (currentScrollY > this.lastScrollY) {
+          this.navbar.style.transform = 'translateY(200%)';
+        } else {
+          this.navbar.style.transform = 'translateY(0)';
+        }
+        
+        this.lastScrollY = currentScrollY;
+      } else {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY < 100) {
+          this.navbar.style.transform = 'translateY(0)';
+        } else if (currentScrollY > this.lastScrollY) {
+          this.navbar.style.transform = 'translateY(-200%)';
+        } else {
+          this.navbar.style.transform = 'translateY(0)';
+        }
+        
+        this.lastScrollY = currentScrollY;
+      }
+    }
+
+    handleResize = () => {
+      const wasMobile = this.isMobile;
+      this.isMobile = window.innerWidth < 768;
+      
+      if (wasMobile !== this.isMobile) {
+        this.setInitialPosition();
+      }
+    }
+
+    handleScroll = () => {
+      requestAnimationFrame(() => this.updateNavbarVisibility());
+    }
+
+    attachEventListeners() {
+      window.addEventListener('scroll', this.handleScroll, { passive: true });
+      window.addEventListener('resize', this.handleResize);
+    }
+
+    detachEventListeners() {
+      window.removeEventListener('scroll', this.handleScroll);
+      window.removeEventListener('resize', this.handleResize);
+    }
+  }
+
+  // Initialize controller
+  let navController = new NavbarController();
+
+  // Handle page transitions
+  document.addEventListener('astro:after-swap', () => {
+    navController.detachEventListeners();
+    navController = new NavbarController();
+  });
+
+  document.addEventListener('astro:before-swap', () => {
+    navController.detachEventListeners();
+  });
+</script>
 
 <style>
   .nav-active {
@@ -77,32 +174,37 @@ const currentPath = Astro.url.pathname;
     height: 0.25rem;
     background: rgb(255, 255, 255);
     border-radius: 9999px 9999px 0 0;
-    box-shadow: 
-      0 0 25px 5px rgba(255, 255, 255, 1),    /* Intense outer glow */
-      0 0 15px 5px rgba(255, 255, 255, 1),    /* Strong middle glow */
-      0 0 10px 5px rgba(255, 255, 255, 1),    /* Core glow */
-      0 0 70px 7px rgba(255, 255, 255, 0.8),  /* Extended distant glow */
-      0 0 100px 10px rgba(255, 255, 255, 0.6), /* Far-reaching glow */
-      0 0 20px 5px rgba(255, 255, 255, 1);    /* Extra bright core */
+    /* Multi-layered glow effect */
+    box-shadow:
+      /* Core bright glow - intense white light at close range */
+
+      
+
+   
+      
+      /* Mid-range glow - starts the fade out effect */
+      0 0 100px 10px rgba(255, 255, 255, 0.8),
+      
+      /* Outer glow - creates the larger, softer halo */
+      0 0 100px 20px rgba(255, 255, 255, 0.6),
+      
+      /* Sharp highlight - adds a crisp edge to the glow */
+      0 0 20px 5px rgba(255, 255, 255, 1);
+    opacity: 0.9;
   }
 
-  /* Glow effects */
-  .nav-active::after {
-    box-shadow: 
-      0 -8px 20px rgb(255 255 255 / 0.2),
-      0 -4px 16px rgb(255 255 255 / 0.2),
-      0 -2px 10px rgb(255 255 255 / 0.2);
+  @media (prefers-reduced-motion: reduce) {
+    .nav-active::after {
+      transition: none;
+    }
   }
-</style>
 
-<script>
-  // Add animation when changing pages
-  document.addEventListener('astro:page-load', () => {
-    const navLinks = document.querySelectorAll('a');
-    navLinks.forEach(link => {
-      if (link.getAttribute('aria-current') === 'page') {
-        link.classList.add('nav-active');
-      }
-    });
-  });
-</script> 
+  /* Syntax explanation for each line:
+      0 0 [blur-radius] [spread-radius] [color]
+      - First 0: horizontal offset
+      - Second 0: vertical offset
+      - blur-radius: how much the shadow is blurred
+      - spread-radius: how far the shadow spreads
+      - color: color with opacity
+  */
+</style> 
