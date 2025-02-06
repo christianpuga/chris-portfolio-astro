@@ -1,20 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// selected-work.astro
-const works = [
-  {
-    company: "Felkrem",
-    project: "Branding",
-    type: "Redesign",
-    image: "https://via.placeholder.com/600x400" // Placeholder image
-  },
-  {
-    company: "Neerme",
-    project: "Project Name 2",
-    type: "Project Type 2",
-    image: "https://via.placeholder.com/600x400"
-  }
-];
 
 const content = {
   en: {
@@ -32,28 +17,14 @@ const currentLang = 'en'; // Default to English
 ---
 
 <Layout>
-	<main class="min-h-screen flex flex-col items-center justify-center px-4 md:pb-0 pb-20" id="hero-main">
-		<div class="flex gap-4 mb-6 relative z-[45]">
-			<button 
-				data-lang="en"
-				class="language-btn text-gray-400 hover:text-white transition-colors" 
-			>
-				English
-			</button>
-			<button 
-				data-lang="es"
-				class="language-btn text-gray-400 hover:text-white transition-colors" 
-			>
-				Español
-			</button>
-		</div>
+	<main class="min-h-screen flex flex-col items-center justify-center px-4 md:pb-0 pb-24" id="hero-main">
 		
 		<div class="content-animation-container text-center max-w-3xl relative z-[40]">
 			<h1 id="hero-title" class="text-4xl sm:text-6xl md:text-6xl font-bold mb-2 text-center">
-				{content[currentLang].title}
+				Hey, I'm Chris. I design cool stuff that just makes sense.
 			</h1>
 			<p id="hero-subtitle" class="text-base sm:text-lg md:text-xl text-gray-400 text-center">
-				{content[currentLang].subtitle}
+				Simple, intuitive, and user-focused. Take a look around!
 			</p>
 		</div>
 		
@@ -65,23 +36,79 @@ const currentLang = 'en'; // Default to English
 		</div>
 	</main>
 
-	<section class="max-w-[880px] mx-auto text-white py-10 px-6" id="work-section">
-		<h2 class="text-2xl font-semibold mb-6 text-left">Selected work</h2>
-		<div class="space-y-8">
-			{works.map((work) => (
-				<div class="rounded-xl overflow-hidden">
-					<div class="w-full h-[300px] md:h-[540px] bg-white"></div>
-					<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 gap-2 sm:gap-0">
-						<div>
-							<h3 class="text-lg font-medium">{work.company}</h3>
-							<p class="text-sm text-gray-400">{work.project}</p>
-						</div>
-						<span class="text-sm text-gray-400">{work.type}</span>
-					</div>
+
+	<section class="max-w-[1000px] mx-auto relative text-white py-10 px-4 sm:px-6 lg:px-8" id="work-section">
+		<h2 class="text-xl sm:text-2xl lg:text-3xl font-semibold text-left">Selected Work</h2>
+	
+		<div class="flex flex-col gap-10 mt-10">
+			<!-- Work Item -->
+			<div class="relative max-w-[1000px] p-6 border border-gray-700 rounded-2xl 
+				bg-gradient-to-b from-[#2D2F36] to-[#1A1B1F] 
+				hover:from-[#8C53DB] hover:to-[#1A1B1F] 
+				gradient-transition text-white 
+				min-h-[320px] sm:min-h-[600px] lg:min-h-[680px] 
+				flex flex-col justify-end group">
+				
+				<!-- Arrow Icon -->
+				<div class="absolute top-6 right-6 text-gray-400 hover:text-white transition">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+					</svg>
 				</div>
-			))}
+	
+				<!-- Title & Subtitle (Top-Left) -->
+				<div class="absolute top-6 left-6">
+					<h2 class="text-lg sm:text-xl font-semibold text-white">Linda Caicedo Website</h2>
+					<p class="text-sm sm:text-base text-gray-400">Player profile website</p>
+				</div>
+	
+				<!-- Image Container -->
+				<div class="border border-gray-600 rounded-lg overflow-hidden w-full 
+					transition-transform duration-300 ease-in-out transform 
+					group-hover:-translate-y-2">
+					<img 
+						src="https://cdn.glitch.global/922fac7e-fd84-403d-88ed-7f031183e182/Group%203.png?v=1738825520534" 
+						alt="Image"
+						class="w-full h-auto object-cover" 
+					/>
+				</div>
+			</div>
+	
+			<!-- Duplicate Work Item -->
+			<div class="relative max-w-[1000px] p-6 border border-gray-700 rounded-2xl 
+				bg-gradient-to-b from-[#2D2F36] to-[#1A1B1F] 
+				hover:from-[#8C53DB] hover:to-[#1A1B1F] 
+				gradient-transition text-white 
+				min-h-[320px] sm:min-h-[600px] lg:min-h-[680px] 
+				flex flex-col justify-end group">
+				
+				<!-- Arrow Icon -->
+				<div class="absolute top-6 right-6 text-gray-400 hover:text-white transition">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+					</svg>
+				</div>
+	
+				<!-- Title & Subtitle (Top-Left) -->
+				<div class="absolute top-6 left-6">
+					<h2 class="text-lg sm:text-xl font-semibold text-white">Title Here</h2>
+					<p class="text-sm sm:text-base text-gray-400">Subtitle goes here</p>
+				</div>
+	
+				<!-- Image Container -->
+				<div class="border border-gray-600 rounded-lg overflow-hidden w-full 
+					transition-transform duration-300 ease-in-out transform 
+					group-hover:-translate-y-2">
+					<img 
+						src="https://cdn.glitch.global/922fac7e-fd84-403d-88ed-7f031183e182/Group%203.png?v=1738825520534" 
+						alt="Image"
+						class="w-full h-auto object-cover" 
+					/>
+				</div>
+			</div>
 		</div>
 	</section>
+	
 
 	<div class="min-h-screen text-white flex flex-col py-16 max-w-[880px] mx-auto px-6" id="about-section">
 		<h1 class="text-xl font-semibold mb-8 w-full text-left">About me</h1>
@@ -242,178 +269,34 @@ const currentLang = 'en'; // Default to English
 		position: absolute;
 	}
 
-	.language-btn {
-		position: relative;
-		padding: 0.5rem 1rem;
-		background: transparent;
-		border: none;
-		font-size: 1rem;
-		cursor: pointer;
-	}
-
-	.language-btn.active {
-		color: white;
-	}
-
-	.language-btn::after {
-		content: '';
-		position: absolute;
-		bottom: -2px;
-		left: 0;
-		width: 100%;
-		height: 1px;
-		background-color: white;
-		transform: scaleX(0);
-		transition: transform 0.3s ease;
-	}
-
-	.language-btn.active::after,
-	.language-btn:hover::after {
-		transform: scaleX(1);
-	}
-
 	#hero-title,
 	#hero-subtitle {
 		opacity: 1;
 		transition: opacity 0.3s ease-in-out;
 	}
+
+	.gradient-transition {
+		background-size: 200% 200%;
+		transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.gradient-transition:hover {
+		background-position: 100% 100%;
+	}
+
+	.image-slide {
+		transform: translateY(48px);
+		transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+		will-change: transform;
+	}
+
+	.group:hover .image-slide {
+		transform: translateY(0);
+	}
 </style>
 
 <script is:inline>
-	// Store content object in window to access it in functions
-	window.content = {
-		en: {
-			title: "Hey, I'm Chris. I design cool stuff that just makes sense.",
-			subtitle: "Simple, intuitive, and user-focused. Take a look around!"
-		},
-		es: {
-			title: "Hola, soy Chris. Diseño cosas geniales que tienen sentido.",
-			subtitle: "Simple, intuitivo y centrado en el usuario. ¡Echa un vistazo!"
-		},
-	};
 
-	class TextScramble {
-		constructor(el) {
-			this.el = el;
-			this.chars = '!<>-_\\/[]{}—=+*^?#________';
-			this.update = this.update.bind(this);
-		}
-		
-		setText(newText) {
-			const oldText = this.el.innerText;
-			const length = Math.max(oldText.length, newText.length);
-			const promise = new Promise((resolve) => this.resolve = resolve);
-			this.queue = [];
-			for (let i = 0; i < length; i++) {
-				const from = oldText[i] || '';
-				const to = newText[i] || '';
-				const start = Math.floor(Math.random() * 40);
-				const end = start + Math.floor(Math.random() * 40);
-				this.queue.push({ from, to, start, end });
-			}
-			cancelAnimationFrame(this.frameRequest);
-			this.frame = 0;
-			this.update();
-			return promise;
-		}
-		
-		update() {
-			let output = '';
-			let complete = 0;
-			for (let i = 0, n = this.queue.length; i < n; i++) {
-				let { from, to, start, end, char } = this.queue[i];
-				if (this.frame >= end) {
-					complete++;
-					output += to;
-				} else if (this.frame >= start) {
-					if (!char || Math.random() < 0.28) {
-						char = this.randomChar();
-						this.queue[i].char = char;
-					}
-					output += `<span class="text-emerald-400">${char}</span>`;
-				} else {
-					output += from;
-				}
-			}
-			this.el.innerHTML = output;
-			if (complete === this.queue.length) {
-				this.resolve();
-			} else {
-				this.frameRequest = requestAnimationFrame(this.update);
-				this.frame++;
-			}
-		}
-		
-		randomChar() {
-			return this.chars[Math.floor(Math.random() * this.chars.length)];
-		}
-	}
-
-	function initializeScramble() {
-		const titleScrambler = new TextScramble(document.getElementById('hero-title'));
-		const subtitleScrambler = new TextScramble(document.getElementById('hero-subtitle'));
-		const languages = ['en', 'es']; // Only English and Spanish
-		let currentLang = 'en';
-		let isLanguageSelected = false;
-		let intervalId;
-
-		// Function to update button states
-		function updateButtons(lang) {
-			document.querySelectorAll('.language-btn').forEach(btn => {
-				const isActive = btn.dataset.lang === lang;
-				btn.classList.toggle('active', isActive);
-				btn.classList.toggle('text-white', isActive);
-				btn.classList.toggle('text-gray-400', !isActive);
-			});
-		}
-
-		// Function to scramble text
-		function scrambleText(lang) {
-			if (!window.content[lang]) {
-				console.error('Language not found:', lang);
-				return;
-			}
-			currentLang = lang;
-			updateButtons(lang);
-			titleScrambler.setText(window.content[lang].title);
-			subtitleScrambler.setText(window.content[lang].subtitle);
-		}
-
-		// Start alternating animation between English and Spanish
-		function startAlternatingAnimation() {
-			// Clear any existing interval
-			if (intervalId) {
-				clearInterval(intervalId);
-			}
-
-			// Reset language selection state
-			isLanguageSelected = false;
-
-			// Set interval to switch between English and Spanish
-			intervalId = setInterval(() => {
-				if (!isLanguageSelected) {
-					// Simply toggle between en and es
-					const nextLang = currentLang === 'en' ? 'es' : 'en';
-					scrambleText(nextLang);
-				}
-			}, 5000); // Changed to 5 seconds (5000ms)
-		}
-
-		// Add click handlers to buttons
-		document.querySelectorAll('.language-btn').forEach(btn => {
-			btn.addEventListener('click', (e) => {
-				const lang = e.currentTarget.dataset.lang;
-				if (lang) {
-					isLanguageSelected = true;
-					clearInterval(intervalId);
-					scrambleText(lang);
-				}
-			});
-		});
-
-		// Start the alternating animation
-		startAlternatingAnimation();
-	}
 
 
 	
