@@ -32,7 +32,7 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <ViewTransitions />
   </head>
-  <body class="bg-[#1A1B1F] text-white flex flex-col min-h-screen">
+  <body class="scrollbar-gutter-stable bg-[#1A1B1F] text-white flex flex-col min-h-screen">
     <Navbar />
     <main class="flex-grow">
       <slot />
@@ -74,5 +74,48 @@ const {
       </div>
     </footer>
   </body>
+
+<style>
+  /* For Webkit browsers (Chrome, Safari, etc) */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a;
+  border-radius: 4px;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a transparent;
+}
+
+/* Auto-hide scrollbar when not scrolling */
+body {
+  overflow-y: overlay; /* This creates a layer above the content */
+}
+
+/* Optional: Hide scrollbar when not hovering */
+::-webkit-scrollbar-thumb {
+  visibility: hidden;
+}
+
+body:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+/* Optional: Show scrollbar when scrolling */
+body::-webkit-scrollbar-thumb:active {
+  visibility: visible;
+}
+</style>
+
 </html>
 
