@@ -27,6 +27,8 @@ const currentPath = Astro.url.pathname;
   </div>
 </nav>
 
+<div id="custom-cursor"></div>
+
 <style>
 
 .active-link {
@@ -119,6 +121,15 @@ const currentPath = Astro.url.pathname;
       }
 
       lastScrollY = currentScrollY;
+    });
+
+    // Custom cursor code
+    const cursor = document.getElementById('custom-cursor');
+    if (!cursor) return;
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = (e.clientX - 16) + 'px';
+      cursor.style.top = (e.clientY - 16) + 'px';
     });
   });
 
