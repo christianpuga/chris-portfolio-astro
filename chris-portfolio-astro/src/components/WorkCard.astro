@@ -1,0 +1,39 @@
+---
+interface Props {
+  company: string;
+  project: string;
+  type: string;
+  image: string;
+}
+
+const { company, project, type, image } = Astro.props;
+---
+
+<div class="rounded-xl overflow-hidden">
+  <div class="w-full h-[300px] md:h-[400px] bg-white relative overflow-hidden">
+    <img 
+      src={image} 
+      alt={`${company} - ${project}`} 
+      class="w-full h-full object-cover"
+    />
+  </div>
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 gap-2 sm:gap-0">
+    <div>
+      <h3 class="text-lg font-medium text-white">{company}</h3>
+      <p class="text-sm text-gray-400">{project}</p>
+    </div>
+    <span class="text-sm text-gray-400">{type}</span>
+  </div>
+</div>
+
+<style>
+  .work-item {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .work-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style> 

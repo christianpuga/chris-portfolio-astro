@@ -1,0 +1,128 @@
+---
+const navItems = [
+  { name: "Home", url: "/" },
+  { name: "Projects", url: "/projects" },
+  { name: "About", url: "/about" },
+  { name: "Contact", url: "/contact" },
+];
+const currentPath = Astro.url.pathname;
+---
+
+<nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-[#181a1b] to-transparent transition-all duration-300 opacity-100 translate-y-0">
+  <div class="max-w-screen-xl mx-auto px-4 h-16 flex items-center justify-center gap-8">
+    {navItems.map((item) => {
+      const isActive = currentPath === item.url;
+      return (
+        <a
+          href={item.url}
+          aria-current={isActive ? "page" : undefined}
+          class={`text-white/60 hover:text-gray-200 text-sm font-normal transition-transform ${
+            isActive ? 'active-link' : ''
+          }`}
+        >
+          {item.name}
+        </a>
+      );
+    })}
+  </div>
+</nav>
+
+<style>
+
+.active-link {
+  font-weight: 700;
+  color: white !important;
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+  
+.classic-navbar {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-32px);
+  animation: navbar-fade-in 1s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+@keyframes navbar-fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  height: 64px;
+  padding: 0 2rem;
+}
+
+.navbar-link {
+  color: #ffffff93;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem 0.5rem;
+  transition: color 0.2s;
+  border: none;
+  background: none;
+}
+
+.navbar-link:hover {
+  color: #e0e0e0;
+}
+
+@media (max-width: 600px) {
+  .navbar-container {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  .classic-navbar {
+    height: 56px;
+  }
+}
+
+.transition-transform {
+  transition: transform 0.3s ease-in-out;
+}
+
+
+</style>
+
+<script>
+  let lastScrollY = window.scrollY;
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('navbar');
+    if (!navbar) return;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Scroll down → hide (fade + slide up)
+        navbar.classList.remove('opacity-100', 'translate-y-0');
+        navbar.classList.add('opacity-0', '-translate-y-4');
+      } else {
+        // Scroll up → show (fade + slide down)
+        navbar.classList.remove('opacity-0', '-translate-y-4');
+        navbar.classList.add('opacity-100', 'translate-y-0');
+      }
+
+      lastScrollY = currentScrollY;
+    });
+  });
+
+  
+</script>
+
+<!-- No script needed for classic always-visible navbar --> 
