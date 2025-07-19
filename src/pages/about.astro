@@ -2,18 +2,260 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-
-
-  <Layout>
-	<div class="bg-gray-950">
-		<h1>Hello World</h1>
+<Layout>
+	<div class="text-white flex flex-col py-16 max-w-[880px] mx-auto px-6" id="about-section">
+		<h1 class="text-xl font-semibold mb-8 w-full text-left">About me</h1>
+		
+		<div class="fade-in-section flex flex-col sm:flex-row items-start sm:items-center gap-8">
+			<!-- Image container with gradient border -->
+			<div class="relative min-h-[320px] w-full sm:w-96">
+				<div class="p-4 sm:pb-6 border border-gray-700 rounded-2xl 
+					bg-gradient-to-b from-[#2D2F36] to-[#1A1B1F] 
+					gradient-transition
+					flex flex-col justify-end group" id="gradient-border">
+					
+					<div class="p-[3px] rounded-xl bg-gradient-to-b from-gray-500 to-gray-800">
+						<div class="w-full h-48 sm:h-124 bg-gray-200 rounded-xl shrink-0" id="image-about">
+							<img 
+					src="https://cdn.glitch.global/922fac7e-fd84-403d-88ed-7f031183e182/chris-desktop.jpg?v=1738798693750"
+					alt="Bowling image" 
+					class="w-94 h-124 object-cover rounded-xl"
+				/>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<!-- About text section -->
+			<div id="about-text" class="flex-1">
+				<h2 class="text-lg font-semibold mb-2">About me</h2>
+				<p class="text-sm text-gray-400">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				</p>
+			</div>
+		</div>
 	</div>
 
-    <div class="mx-auto flex max-w-sm items-center gap-x-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-        <img class="size-12 shrink-0" src="/img/logo.svg" alt="ChitChat Logo" />
-        <div>
-          <div class="text-xl font-medium text-black dark:text-white">ChitChat</div>
-          <p class="text-gray-500 dark:text-gray-400">You have a new message!</p>
-        </div>
-      </div>
+	<section class="max-w-[880px] mx-auto text-white py-10 px-6" id="hobbies-section">
+		<h2 class="text-2xl font-semibold mb-1 text-center">Challenges, Sports, Gaming</h2>
+		<p class="text-gray-400 mb-15 text-center">The Fuel I always have enjoyed the most</p>
+	  
+		<div class="flex flex-wrap gap-8">
+			<!-- Left Box with Bowling Text -->
+			<div class="flex flex-col">
+				<img 
+					src="https://cdn.glitch.global/922fac7e-fd84-403d-88ed-7f031183e182/chris-desktop.jpg?v=1738798693750"
+					alt="Bowling image" 
+					class="w-94 h-124 object-cover rounded-xl"
+				/>
+				<div class="mt-4 mb-20">
+					<p class="text-sm text-center">Currently competing in bowling</p>
+					<p class="text-sm text-gray-400 text-center">(Is not that serious)</p>
+				</div>
+			</div>
+
+			<!-- Right Box with Description -->
+			<div class="flex flex-col">
+				<img 
+					src="https://cdn.glitch.global/922fac7e-fd84-403d-88ed-7f031183e182/chris-bowl.jpeg?v=1738651204173" 
+					alt="Hobby image" 
+					class="w-94 h-82 object-cover rounded-xl"
+				/>
+				<p class="text-gray-300 mt-4 text-sm max-w-md">
+					Lorem ipsum dolor sit amet...
+				</p>
+			</div>
+		</div>
+	</section>
+	
+	<div class="text-white flex items-center mb-20 justify-center px-6">
+		<div class="max-w-[880px] w-full">
+			<h2 class="text-xl font-semibold mt-4 mb-5 border-t border-gray-500 pt-9">Experience</h2>
+
+			<div class="space-y-12 mt-8">
+				<!-- Azzule Experience -->
+				<div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+					<div class="sm:w-1/3">
+						<h3 class="text-2xl font-bold">Azzule</h3>
+					</div>
+					<div class="sm:w-2/3">
+						<h4 class="text-lg font-semibold">Lead Designer</h4>
+						<p class="text-gray-400 text-sm">Jun /2020 - Present</p>
+						<p class="text-gray-300 mt-2 text-sm">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</p>
+					</div>
+				</div>
+
+				<!-- Felkrem Experience -->
+				<div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+					<div class="sm:w-1/3">
+						<h3 class="text-2xl font-bold">Felkrem</h3>
+					</div>
+					<div class="sm:w-2/3">
+						<h4 class="text-lg font-semibold">Marketing Designer</h4>
+						<p class="text-gray-400 text-sm">Oct/2018 - Jun/2020</p>
+						<p class="text-gray-300 mt-2 text-sm">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</p>
+					</div>
+				</div>
+
+				<!-- Televisa Experience -->
+				<div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+					<div class="sm:w-1/3">
+						<h3 class="text-2xl font-bold">Televisa</h3>
+					</div>
+					<div class="sm:w-2/3">
+						<h4 class="text-lg font-semibold">User Interface Designer</h4>
+						<p class="text-gray-400 text-sm">Oct/2018 - Jun/2020</p>
+						<p class="text-gray-300 mt-2 text-sm">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</p>
+					</div>
+				</div>
+
+				<!-- Geeklopers Experience -->
+				<div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+					<div class="sm:w-1/3">
+						<h3 class="text-2xl font-bold">Geeklopers</h3>
+					</div>
+					<div class="sm:w-2/3">
+						<h4 class="text-lg font-semibold">User Interface Designer</h4>
+						<p class="text-gray-400 text-sm">Oct/2018 - Jun/2020</p>
+						<p class="text-gray-300 mt-2 text-sm">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</p>
+					</div>
+				</div>
+
+				<!-- Yellowme Experience -->
+				<div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+					<div class="sm:w-1/3">
+						<h3 class="text-2xl font-bold">Yellowme</h3>
+					</div>
+					<div class="sm:w-2/3">
+						<h4 class="text-lg font-semibold">User Experience Designer</h4>
+						<p class="text-gray-400 text-sm">Feb/2018 - Dec/2018</p>
+						<p class="text-gray-300 mt-2 text-sm">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </Layout>
+
+<style>
+	.fade-section {
+		opacity: 1;
+		transform: translateY(0);
+		transition: all 1s ease-out;
+	}
+
+	#hero-main.fade-out {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+
+	.content-animation-container {
+		position: relative;
+	}
+
+	.content-set {
+		opacity: 1;
+		transition: opacity 0.5s ease-in-out;
+	}
+
+	.content-set.hidden {
+		opacity: 0;
+		position: absolute;
+	}
+
+	#hero-title,
+	#hero-subtitle {
+		opacity: 1;
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	.gradient-transition {
+		background-size: 200% 200%;
+		transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.gradient-transition:hover {
+		background-position: 100% 100%;
+	}
+
+	.image-slide {
+		transform: translateY(48px);
+		transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+		will-change: transform;
+	}
+
+	.group:hover .image-slide {
+		transform: translateY(0);
+	}
+
+	.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gradient-transition {
+    transition: background 0.3s ease-in-out;
+}
+</style>
+
+<script is:inline>
+
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+function initializeObserver() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, observerOptions);
+
+    const fadeElements = document.querySelectorAll('.fade-in-section');
+    fadeElements.forEach(element => {
+        // Reset the element's state
+        element.classList.remove('is-visible');
+        observer.observe(element);
+    });
+}
+
+// Initialize on initial page load
+document.addEventListener('DOMContentLoaded', initializeObserver);
+
+// Initialize after Astro view transitions
+document.addEventListener('astro:page-load', initializeObserver);
+
+// Clean up before view transitions
+document.addEventListener('astro:before-swap', () => {
+    const fadeElements = document.querySelectorAll('.fade-in-section');
+    fadeElements.forEach(element => {
+        element.classList.remove('is-visible');
+    });
+});
+
+// Initialize after content swap
+document.addEventListener('astro:after-swap', () => {
+    initializeObserver();
+});
+</script>
